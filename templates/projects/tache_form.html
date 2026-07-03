@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 bg-white p-4 shadow rounded">
+        <h3 class="mb-4">Créer une nouvelle tâche</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="titre" class="form-label">Titre de la tâche :</label>
+                <input type="text" name="titre" id="titre" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description :</label>
+                <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="projet" class="form-label">Associer au Projet :</label>
+                <select name="projet" id="projet" class="form-select" required>
+                    {% for projet in projets %}
+                        <option value="{{ projet.id }}">{{ projet.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Ajouter la tâche</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

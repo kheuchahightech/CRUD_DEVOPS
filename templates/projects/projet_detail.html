@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h2>{{ projet.nom }}</h2>
+        <p class="text-muted">{{ projet.description }}</p>
+        <a href="{% url 'tache_create' %}" class="btn btn-success btn-sm">+ Ajouter une tâche</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Retour</a>
+    </div>
+</div>
+
+<h3>Liste des tâches</h3>
+<div class="list-group">
+    {% for tache in taches %}
+        <div class="list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm rounded">
+            <div>
+                <h5 class="mb-1">{{ tache.titre }}</h5>
+                <small class="text-muted">{{ tache.description }}</small>
+            </div>
+            <span class="badge bg-secondary p-2">{{ tache.get_statut_display }}</span>
+        </div>
+    {% empty %}
+        <p class="text-muted">Aucune tâche associée à ce projet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
