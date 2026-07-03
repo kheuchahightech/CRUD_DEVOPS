@@ -16,6 +16,12 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 # Lit la liste des hôtes autorisés depuis Railway, séparés par des virgules
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
+# Configuration de la sécurité CSRF pour la production
+# Configuration de la sécurité CSRF pour la production
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-ad6aec.up.railway.app',
+]
+
 
 # Application definition
 
@@ -49,6 +55,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         'DIRS': [BASE_DIR / 'templates'],
+
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
