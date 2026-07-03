@@ -4,6 +4,9 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "numReplicas": 1
+    "numReplicas": 1,
+    "restartPolicyType": "ON_FAILURE",
+    "healthCheckPath": "/",
+    "preDeployCommand": "python manage.py migrate --noinput"
   }
 }
