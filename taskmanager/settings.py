@@ -72,11 +72,16 @@ WSGI_APPLICATION = "taskmanager.wsgi.application"
 
 # --- CONFIGURATION DYNAMIQUE DE LA BASE DE DONNÉES ---
 
-if config('DATABASE_URL', default=None):
+if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True
+        )
     }
 else:
+    # Configuration locale de secours (sur ton ordinateur)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
